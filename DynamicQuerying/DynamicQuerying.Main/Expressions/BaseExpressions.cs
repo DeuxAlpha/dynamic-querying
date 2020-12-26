@@ -6,7 +6,6 @@ namespace DynamicQuerying.Main.Expressions
 {
     internal static class BaseExpressions
     {
-        // TODO: Considers migrating expressions to extensions...?
         public static Expression GetDotMember(Expression expression, string propertyName)
         {
             return propertyName.Split('.').Aggregate(expression, Expression.PropertyOrField);
