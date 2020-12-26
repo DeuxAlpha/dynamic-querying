@@ -1,7 +1,8 @@
 ﻿namespace DynamicQuerying.Main.Query.Sorting.Enums
 {
-    public class SortDirection
+    public enum SortDirection
     {
-        
+        Ascending = 1,
+        Descending = 2
     }
 }

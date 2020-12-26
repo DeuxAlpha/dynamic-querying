@@ -2,6 +2,6 @@
 {
     public class Distinctor
     {
-        
+        public string PropertyName { get; set; }
     }
 }

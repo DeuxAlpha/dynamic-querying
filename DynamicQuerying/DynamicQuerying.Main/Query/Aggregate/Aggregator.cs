@@ -2,6 +2,6 @@
 {
     public class Aggregator
     {
-
+        public string PropertyName { get; set; }
     }
 }
