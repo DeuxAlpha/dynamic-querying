@@ -22,7 +22,7 @@ namespace DynamicQuerying.Main.Query.Services
             return Task.Run(() => GetQueryResponse(source, queryRequest));
         }
 
-        public static void FinishResponse<T>(
+        private static void FinishResponse<T>(
             IQueryable<T> source,
             QueryRequest queryRequest,
             QueryResponse<T> queryResponse)
