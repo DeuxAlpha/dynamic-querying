@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 
 namespace DynamicQuerying.Sample
 {
@@ -33,15 +32,9 @@ namespace DynamicQuerying.Sample
                 options.AddPolicy("CORS", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-            services.AddDbContext<SampleContext>(options =>
-                options
-                    .UseSqlServer("Server=localhost,20302;Database=sample-db;User Id=sa;Password=Your_password123;"));
+            services.AddDbContext<SampleContext>();
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "DynamicQuerying.Sample", Version = "v1"});
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,9 +43,9 @@ namespace DynamicQuerying.Sample
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DynamicQuerying.Sample v1"));
             }
+
+            app.UseCors("CORS");
 
             app.UseHttpsRedirection();
 

@@ -7,6 +7,8 @@ namespace DynamicQuerying.Sample.Contexts
     {
         public virtual DbSet<User> Users { get; set; }
 
+        public SampleContext(){}
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Don't use plaintext connection strings in code, kids.

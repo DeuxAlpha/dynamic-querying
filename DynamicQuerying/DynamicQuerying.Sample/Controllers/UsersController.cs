@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using DynamicQuerying.Main.Query.Models;
 using DynamicQuerying.Main.Query.Services;
@@ -22,7 +24,10 @@ namespace DynamicQuerying.Sample.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers(QueryRequest queryRequest)
         {
-            return Ok(await QueryService.GetQueryResponseAsync(_context.Users, queryRequest));
+            var sw = Stopwatch.StartNew();
+            var queryResponse = await QueryService.GetQueryResponseAsync(_context.Users, queryRequest);
+            Console.WriteLine(sw.Elapsed);
+            return Ok(queryResponse);
         }
     }
 }

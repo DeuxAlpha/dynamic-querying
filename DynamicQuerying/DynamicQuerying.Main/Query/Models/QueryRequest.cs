@@ -7,6 +7,7 @@ using DynamicQuerying.Main.Query.Sorting;
 
 namespace DynamicQuerying.Main.Query.Models
 {
+    // TODO: Provide Request DTO to convert string to Enums (e.g. Contains to 7)
     public class QueryRequest
     {
         public IEnumerable<Filter> Filters { get; set; } = new List<Filter>();
