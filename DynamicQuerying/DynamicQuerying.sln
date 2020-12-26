@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Main", "Dyn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Tests", "DynamicQuerying.Tests\DynamicQuerying.Tests.csproj", "{339469E0-9965-4806-A7D4-9A14FAB8645E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Sample", "DynamicQuerying.Sample\DynamicQuerying.Sample.csproj", "{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{339469E0-9965-4806-A7D4-9A14FAB8645E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{339469E0-9965-4806-A7D4-9A14FAB8645E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{339469E0-9965-4806-A7D4-9A14FAB8645E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
