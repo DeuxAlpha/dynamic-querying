@@ -171,5 +171,23 @@ namespace DynamicQuerying.Sample.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        // Deletes all items that fit the filters.
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUsers(QueryRequest queryRequest)
+        {
+            var filtersUsers = await QueryService.GetQueryResponseAsync(_context.Users, queryRequest);
+            _context.Users.RemoveRange(filtersUsers.Items);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("everything")]
+        public async Task<IActionResult> DeleteAllUsers()
+        {
+            _context.Users.RemoveRange(_context.Users);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
