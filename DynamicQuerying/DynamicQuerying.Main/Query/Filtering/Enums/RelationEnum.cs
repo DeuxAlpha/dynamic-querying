@@ -1,6 +1,6 @@
 ﻿namespace DynamicQuerying.Main.Query.Filtering.Enums
 {
-    public enum Relation
+    public enum RelationEnum
     {
         And = 1,
         AndAlso = 2,

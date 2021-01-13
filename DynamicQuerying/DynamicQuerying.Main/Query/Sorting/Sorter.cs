@@ -1,10 +1,12 @@
-﻿using DynamicQuerying.Main.Query.Sorting.Enums;
+﻿using System;
+using DynamicQuerying.Main.Query.Sorting.Enums;
 
 namespace DynamicQuerying.Main.Query.Sorting
 {
     public class Sorter
     {
         public string PropertyName { get; set; }
-        public SortDirection SortDirection { get; set; } = SortDirection.Ascending;
+        public string SortDirection { get; set; } = SortDirectionEnum.Ascending.ToString("F");
+        internal SortDirectionEnum SortDirectionEnum => Enum.Parse<SortDirectionEnum>(SortDirection, true);
     }
 }

@@ -15,7 +15,7 @@ namespace DynamicQuerying.Main.Expressions
 
             var orderMethod = typeof(Queryable)
                 .GetMethods()
-                .First(method => method.Name == (sorter.SortDirection == SortDirection.Ascending
+                .First(method => method.Name == (sorter.SortDirectionEnum == SortDirectionEnum.Ascending
                     ? nameof(Queryable.OrderBy)
                     : nameof(Queryable.OrderByDescending)));
             var genericOrderMethod = orderMethod.MakeGenericMethod(source.ElementType, member.Type);
@@ -32,7 +32,7 @@ namespace DynamicQuerying.Main.Expressions
 
             var orderMethod = typeof(Queryable)
                 .GetMethods()
-                .First(method => method.Name == (sorter.SortDirection == SortDirection.Ascending
+                .First(method => method.Name == (sorter.SortDirectionEnum == SortDirectionEnum.Ascending
                     ? nameof(Queryable.ThenBy)
                     : nameof(Queryable.ThenByDescending)));
             var genericOrderMethod = orderMethod.MakeGenericMethod(source.ElementType, member.Type);

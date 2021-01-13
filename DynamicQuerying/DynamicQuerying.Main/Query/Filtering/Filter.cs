@@ -1,4 +1,5 @@
-﻿using DynamicQuerying.Main.Query.Filtering.Enums;
+﻿using System;
+using DynamicQuerying.Main.Query.Filtering.Enums;
 
 namespace DynamicQuerying.Main.Query.Filtering
 {
@@ -6,7 +7,13 @@ namespace DynamicQuerying.Main.Query.Filtering
     {
         public string PropertyName { get; set; }
         public object Value { get; set; }
-        public Comparison Comparison { get; set; } = Comparison.Equal;
-        public Relation Relation { get; set; } = Relation.And;
+        public string Comparison { get; set; } = ComparisonEnum.Equal.ToString("F");
+        public string Relation { get; set; } = RelationEnum.And.ToString("F");
+
+        internal ComparisonEnum ComparisonEnum =>
+            Comparison.ToLower() == "equals"
+                ? ComparisonEnum.Equal
+                : Enum.Parse<ComparisonEnum>(Comparison, true);
+        internal RelationEnum RelationEnum => Enum.Parse<RelationEnum>(Relation, true);
     }
 }

@@ -36,16 +36,16 @@ namespace DynamicQuerying.Main.Expressions
             {
                 var currentFilter = filterList[index];
                 var previousFilter = filterList[index - 1];
-                expression = previousFilter.Relation switch
+                expression = previousFilter.RelationEnum switch
                 {
-                    Relation.And => Expression.And(expression, GetComparingExpression(parameter, currentFilter)),
-                    Relation.AndAlso => Expression.AndAlso(expression,
+                    RelationEnum.And => Expression.And(expression, GetComparingExpression(parameter, currentFilter)),
+                    RelationEnum.AndAlso => Expression.AndAlso(expression,
                         GetComparingExpression(parameter, currentFilter)),
-                    Relation.Or => Expression.Or(expression, GetComparingExpression(parameter, currentFilter)),
-                    Relation.OrElse => Expression.OrElse(expression, GetComparingExpression(parameter, currentFilter)),
-                    Relation.XOr => Expression.ExclusiveOr(expression,
+                    RelationEnum.Or => Expression.Or(expression, GetComparingExpression(parameter, currentFilter)),
+                    RelationEnum.OrElse => Expression.OrElse(expression, GetComparingExpression(parameter, currentFilter)),
+                    RelationEnum.XOr => Expression.ExclusiveOr(expression,
                         GetComparingExpression(parameter, currentFilter)),
-                    _ => throw new ArgumentOutOfRangeException(nameof(previousFilter.Relation), previousFilter.Relation,
+                    _ => throw new ArgumentOutOfRangeException(nameof(previousFilter.RelationEnum), previousFilter.RelationEnum,
                         null)
                 };
             }
@@ -62,28 +62,28 @@ namespace DynamicQuerying.Main.Expressions
             var property = BaseExpressions.GetDotMember(left, filter.PropertyName);
             var comparingValue = filter.Value == null
                 ? Expression.Constant(null)
-                : filter.Comparison.IsStringComparison()
+                : filter.ComparisonEnum.IsStringComparison()
                     ? Expression.Constant(filter.Value.ToString())
                     : BaseExpressions.ConvertValue(property, filter.Value);
-            return BuildComparingExpression(property, comparingValue, filter.Comparison);
+            return BuildComparingExpression(property, comparingValue, filter.ComparisonEnum);
         }
 
-        private static Expression BuildComparingExpression(Expression left, Expression right, Comparison comparison)
+        private static Expression BuildComparingExpression(Expression left, Expression right, ComparisonEnum comparisonEnum)
         {
-            return comparison switch
+            return comparisonEnum switch
             {
-                Comparison.Equal => Expression.Equal(left, right),
-                Comparison.LessThan => Expression.LessThan(left, right),
-                Comparison.LessThanOrEqual => Expression.LessThanOrEqual(left, right),
-                Comparison.GreaterThan => Expression.GreaterThan(left, right),
-                Comparison.GreaterThanOrEqual => Expression.GreaterThanOrEqual(left, right),
-                Comparison.NotEqual => Expression.NotEqual(left, right),
-                Comparison.Contains => Expression.Call(left, ContainsMethod, right),
-                Comparison.StartsWith => Expression.Call(left, StartsWithMethod, right),
-                Comparison.EndsWith => Expression.Call(left, EndsWithMethod, right),
-                Comparison.HasValue => Expression.NotEqual(left, Expression.Constant(null)),
-                Comparison.HasNoValue => Expression.Equal(left, Expression.Constant(null)),
-                _ => throw new ArgumentOutOfRangeException(nameof(comparison), comparison, null)
+                ComparisonEnum.Equal => Expression.Equal(left, right),
+                ComparisonEnum.LessThan => Expression.LessThan(left, right),
+                ComparisonEnum.LessThanOrEqual => Expression.LessThanOrEqual(left, right),
+                ComparisonEnum.GreaterThan => Expression.GreaterThan(left, right),
+                ComparisonEnum.GreaterThanOrEqual => Expression.GreaterThanOrEqual(left, right),
+                ComparisonEnum.NotEqual => Expression.NotEqual(left, right),
+                ComparisonEnum.Contains => Expression.Call(left, ContainsMethod, right),
+                ComparisonEnum.StartsWith => Expression.Call(left, StartsWithMethod, right),
+                ComparisonEnum.EndsWith => Expression.Call(left, EndsWithMethod, right),
+                ComparisonEnum.NotNull => Expression.NotEqual(left, Expression.Constant(null)),
+                ComparisonEnum.Null => Expression.Equal(left, Expression.Constant(null)),
+                _ => throw new ArgumentOutOfRangeException(nameof(comparisonEnum), comparisonEnum, null)
             };
         }
     }
