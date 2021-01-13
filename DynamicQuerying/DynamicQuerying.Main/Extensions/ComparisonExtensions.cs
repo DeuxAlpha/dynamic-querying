@@ -4,11 +4,11 @@ namespace DynamicQuerying.Main.Extensions
 {
     internal static class ComparisonExtensions
     {
-        public static bool IsStringComparison(this Comparison comparison)
+        public static bool IsStringComparison(this ComparisonEnum comparisonEnum)
         {
-            return comparison == Comparison.Contains ||
-                   comparison == Comparison.StartsWith ||
-                   comparison == Comparison.EndsWith;
+            return comparisonEnum == ComparisonEnum.Contains ||
+                   comparisonEnum == ComparisonEnum.StartsWith ||
+                   comparisonEnum == ComparisonEnum.EndsWith;
         }
     }
 }
