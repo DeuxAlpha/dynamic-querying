@@ -1,6 +1,6 @@
 ﻿namespace DynamicQuerying.Main.Query.Filtering.Enums
 {
-    public enum Comparison
+    public enum ComparisonEnum
     {
         Equal = 1,
         LessThan = 2,
@@ -11,7 +11,7 @@
         Contains = 7,
         StartsWith = 8,
         EndsWith = 9,
-        HasValue = 10,
-        HasNoValue = 11
+        NotNull = 10,
+        Null = 11
     }
 }
