@@ -9,9 +9,22 @@ namespace DynamicQuerying.Sample.Extensions
             var property = theObject.GetType().GetProperty(propertyName);
             if (property == null) throw new NullReferenceException(nameof(property));
 
-            // Try casting automatically
-            var converted = Convert.ChangeType(value.ToString(), property.PropertyType);
-            property.SetValue(theObject, converted);
+            if (value != null)
+            {
+                // Handling nullable.
+                var propertyType = property.PropertyType;
+                if (propertyType.IsGenericType &&
+                    propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    propertyType = propertyType.GetGenericArguments()[0];
+
+                // Try casting automatically
+                var converted = Convert.ChangeType(value.ToString(), propertyType);
+                property.SetValue(theObject, converted);
+            }
+            else
+            {
+                property.SetValue(theObject, null);
+            }
         }
 
         public static object RetrieveValue(this object theObject, string propertyName)

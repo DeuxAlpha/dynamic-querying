@@ -8,7 +8,6 @@ using DynamicQuerying.Sample.Contexts;
 using DynamicQuerying.Sample.Extensions;
 using DynamicQuerying.Sample.Mapping;
 using DynamicQuerying.Sample.Models;
-using DynamicQuerying.Sample.Models.Dtos.Users;
 using DynamicQuerying.Sample.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -73,11 +72,11 @@ namespace DynamicQuerying.Sample.Controllers
 
         // Create new users
         [HttpPost]
-        public async Task<IActionResult> CreateUsers(CreationRequest<UserCreationDto> creationRequest)
+        public async Task<IActionResult> CreateUsers(CreationRequest<User> creationRequest)
         {
             try
             {
-                await _context.Users.AddRangeAsync(creationRequest.Items.Select(item => item.Map()));
+                await _context.Users.AddRangeAsync(creationRequest.Items);
                 await _context.SaveChangesAsync();
                 return Ok();
             }
@@ -90,13 +89,13 @@ namespace DynamicQuerying.Sample.Controllers
         // Generate new users based on values of existing users.
         // This works via the GenerationRequest. Look there for more information.
         [HttpPost("generate")]
-        public async Task<IActionResult> GenerateUsers(GenerationRequest<UserCreationDto> generationRequest)
+        public async Task<IActionResult> GenerateUsers(GenerationRequest<User> generationRequest)
         {
             var filteredUsers = await QueryService.GetQueryResponseAsync(_context.Users, generationRequest.QueryRequest);
             // Sorry about nesting lol
             foreach (var filteredUser in filteredUsers.Items)
             {
-                foreach (var newUser in generationRequest.Items.Select(item => item.Map()))
+                foreach (var newUser in generationRequest.Items)
                 {
                     foreach (var property in generationRequest.CopiedProperties)
                     {
@@ -134,12 +133,41 @@ namespace DynamicQuerying.Sample.Controllers
             return Ok();
         }
 
+        // Import users from a JSON file
         [HttpPost("import/json")]
         public async Task<IActionResult> ImportUsers([FromForm] IFormFile jsonFile)
         {
             await using var fileStream = jsonFile.OpenReadStream();
             var data = await ImportService.ImportDataFromJson(fileStream, new UserHeaderMapping());
             await _context.Users.AddRangeAsync(data);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        // Replaces every property with the values provided (even if the value is null).
+        [HttpPut("replace")]
+        public async Task<IActionResult> ReplaceUsers(ReplaceRequest<User> replaceRequest)
+        {
+            var filteredUsers = await QueryService.GetQueryResponseAsync(_context.Users, replaceRequest.QueryRequest);
+            foreach (var filteredUser in filteredUsers.Items)
+            {
+                ReplacementService.ReplaceProperties(filteredUser, replaceRequest.Item);
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        // Updates only the values that are provided.
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateUsers(UpdateRequest<User> updateRequest)
+        {
+            var filteredUsers = await QueryService.GetQueryResponseAsync(_context.Users, updateRequest.QueryRequest);
+            foreach (var filteredUser in filteredUsers.Items)
+            {
+                ReplacementService.UpdateProperties(filteredUser, updateRequest.Item);
+            }
+
             await _context.SaveChangesAsync();
             return Ok();
         }
