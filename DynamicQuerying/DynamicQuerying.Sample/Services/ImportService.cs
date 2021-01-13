@@ -6,24 +6,57 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using CsvHelper;
+using DynamicQuerying.Sample.Extensions;
 using DynamicQuerying.Sample.Mapping.Base;
 
 namespace DynamicQuerying.Sample.Services
 {
     public static class ImportService
     {
-        public static async Task<IEnumerable<T>> ImportDataFromXlsx<T>(
+        public static IEnumerable<T> ImportDataFromXlsx<T>(
             Stream fileStream,
             string sheetName,
-            HeaderMapping<T> headerMapping)
+            HeaderMapping<T> headerMapping) where T : new()
         {
             using var workbook = new XLWorkbook(fileStream);
-            var worksheet = workbook.Worksheets.FirstOrDefault(sheet => sheet.Name == sheetName);
+            var worksheet = workbook.Worksheets.FirstOrDefault(sheet =>
+                string.IsNullOrWhiteSpace(sheetName) || // If sheetName is null, just pick the first sheet
+                sheet.Name == sheetName);
             if (worksheet == null) throw new NullReferenceException("Worksheet is null.");
-            var columns = new List<string>();
-            var headerRow = worksheet.FirstRow();
-            var properties = headerRow.GetType().GetProperties();
-            throw new NotImplementedException();
+
+            // Assigning column order, just in case
+            var columns = new List<HeaderPropertyCombination>();
+            var headerRow = worksheet.FirstRowUsed();
+            foreach (var cell in headerRow.Cells(1, headerMapping.Length))
+            {
+                var header = headerMapping.MemberMaps
+                    .FirstOrDefault(name => name.GetAssignedName() == cell.Value.ToString());
+                if (header == null)
+                    throw new NullReferenceException($"Could not find associated header. Value: {cell.Value}");
+                columns.Add(new HeaderPropertyCombination
+                {
+                    Header = header.GetAssignedName(),
+                    Property = header.GetOriginalName()
+                });
+            }
+
+            var currentRow = headerRow.RowBelow();
+            var items = new List<T>();
+            while (currentRow.CellsUsed().Any())
+            {
+                var item = new T();
+                foreach (var cell in currentRow.CellsUsed()) // Using CellsUsed because we don't want to waste time on empty cells.
+                {
+                    var columnIndex = cell.WorksheetColumn().ColumnNumber() - 1;
+                    if (columnIndex > columns.Count - 1) continue; // There's a chance that there are more columns used than headers we associated with it.
+                    item.AssignValue(columns[columnIndex].Property, cell.Value);
+                }
+
+                items.Add(item);
+                currentRow = currentRow.RowBelow();
+            }
+
+            return items;
         }
 
         public static IEnumerable<T> ImportDataFromCsv<T>(
@@ -40,6 +73,12 @@ namespace DynamicQuerying.Sample.Services
             var data = csvReader.GetRecords<T>().ToList();
 
             return data;
+        }
+
+        private class HeaderPropertyCombination
+        {
+            public string Header { get; init; }
+            public string Property { get; init; }
         }
     }
 }

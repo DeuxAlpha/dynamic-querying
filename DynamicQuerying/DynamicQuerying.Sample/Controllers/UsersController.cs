@@ -47,7 +47,7 @@ namespace DynamicQuerying.Sample.Controllers
 
         // Export all items via CSV (delimiter pickable)
         [HttpGet("export/csv")]
-        public async Task<IActionResult> ExportUsers(DelimitedExportRequest exportRequest)
+        public async Task<IActionResult> ExportUsers(CsvExportRequest exportRequest)
         {
             var queryResponse = await QueryService.GetQueryResponseAsync(_context.Users, exportRequest.QueryRequest);
             var data = await ExportService.ExportDataToCsv(
@@ -60,7 +60,16 @@ namespace DynamicQuerying.Sample.Controllers
 
         // Export all items via JSON
         [HttpGet("export/json")]
-        public async Task<IActionResult> ExportUsers()
+        public async Task<IActionResult> ExportUsers(JsonExportRequest exportRequest)
+        {
+            var queryResponse = await QueryService.GetQueryResponseAsync(_context.Users, exportRequest.QueryRequest);
+            var data = await ExportService.ExportDataToJson(
+                queryResponse.Items,
+                new UserHeaderMapping(),
+                exportRequest.Indented);
+            var fileName = $"Users_{queryResponse.ItemCount}_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+            return File(data, MimeMapping.MimeUtility.GetMimeMapping(fileName), fileName);
+        }
 
         // Create new users
         [HttpPost]
@@ -109,7 +118,9 @@ namespace DynamicQuerying.Sample.Controllers
         {
             await using var fileStream = importRequest.ExcelFile.OpenReadStream();
             var data = ImportService.ImportDataFromXlsx(fileStream, importRequest.SheetName, new UserHeaderMapping());
-            throw new NotImplementedException();
+            await _context.Users.AddRangeAsync(data);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         // Import users from a CSV file

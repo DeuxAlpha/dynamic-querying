@@ -8,7 +8,10 @@ namespace DynamicQuerying.Sample.Extensions
         {
             var property = theObject.GetType().GetProperty(propertyName);
             if (property == null) throw new NullReferenceException(nameof(property));
-            property.SetValue(theObject, value);
+
+            // Try casting automatically
+            var converted = Convert.ChangeType(value.ToString(), property.PropertyType);
+            property.SetValue(theObject, converted);
         }
 
         public static object RetrieveValue(this object theObject, string propertyName)

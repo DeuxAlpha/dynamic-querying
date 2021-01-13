@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using CsvHelper;
+using DynamicQuerying.Sample.Extensions;
 using DynamicQuerying.Sample.Mapping.Base;
+using Newtonsoft.Json;
 
 namespace DynamicQuerying.Sample.Services
 {
@@ -18,7 +20,7 @@ namespace DynamicQuerying.Sample.Services
             var headerRow = worksheet.FirstRow();
             for (var headerIndex = 0; headerIndex < mapping.MemberMaps.Count; headerIndex++)
             {
-                headerRow.Cell(headerIndex + 1).SetValue(mapping.MemberMaps[headerIndex].Data.Member.Name);
+                headerRow.Cell(headerIndex + 1).SetValue(mapping.MemberMaps[headerIndex].GetAssignedName());
             }
 
             foreach (var row in data)
@@ -49,6 +51,27 @@ namespace DynamicQuerying.Sample.Services
             };
             csvWriter.Configuration.RegisterClassMap(mapping);
             await csvWriter.WriteRecordsAsync(data);
+
+            return memoryStream.ToArray();
+        }
+
+        public static async Task<byte[]> ExportDataToJson<T>(
+            IEnumerable<T> data,
+            HeaderMapping<T> mapping,
+            bool indented)
+        {
+            await using var memoryStream = new MemoryStream();
+            await using var streamWriter = new StreamWriter(memoryStream);
+            var serialized = JsonConvert.SerializeObject(
+                data,
+                indented ? Formatting.Indented : Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new JsonHeaderContractResolver<T>(mapping)
+                });
+
+            await streamWriter.WriteAsync(serialized);
+            await streamWriter.FlushAsync();
 
             return memoryStream.ToArray();
         }
