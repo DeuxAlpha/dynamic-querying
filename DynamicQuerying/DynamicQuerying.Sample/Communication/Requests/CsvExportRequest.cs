@@ -2,7 +2,7 @@
 
 namespace DynamicQuerying.Sample.Communication.Requests
 {
-    public class DelimitedExportRequest
+    public class CsvExportRequest
     {
         public QueryRequest QueryRequest { get; set; } = new();
         public string Delimiter { get; set; } = ",";
