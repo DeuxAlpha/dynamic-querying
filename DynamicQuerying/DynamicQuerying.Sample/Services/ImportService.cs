@@ -8,6 +8,7 @@ using ClosedXML.Excel;
 using CsvHelper;
 using DynamicQuerying.Sample.Extensions;
 using DynamicQuerying.Sample.Mapping.Base;
+using Newtonsoft.Json;
 
 namespace DynamicQuerying.Sample.Services
 {
@@ -71,6 +72,18 @@ namespace DynamicQuerying.Sample.Services
             };
             csvReader.Configuration.RegisterClassMap(headerMapping);
             var data = csvReader.GetRecords<T>().ToList();
+
+            return data;
+        }
+
+        public static async Task<IEnumerable<T>> ImportDataFromJson<T>(Stream fileStream, HeaderMapping<T> headerMapping)
+        {
+            using var streamReader = new StreamReader(fileStream);
+            var content = await streamReader.ReadToEndAsync();
+            var data = JsonConvert.DeserializeObject<IEnumerable<T>>(content, new JsonSerializerSettings
+            {
+                ContractResolver = new JsonHeaderContractResolver<T>(headerMapping)
+            });
 
             return data;
         }

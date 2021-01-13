@@ -133,5 +133,15 @@ namespace DynamicQuerying.Sample.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPost("import/json")]
+        public async Task<IActionResult> ImportUsers([FromForm] IFormFile jsonFile)
+        {
+            await using var fileStream = jsonFile.OpenReadStream();
+            var data = await ImportService.ImportDataFromJson(fileStream, new UserHeaderMapping());
+            await _context.Users.AddRangeAsync(data);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
