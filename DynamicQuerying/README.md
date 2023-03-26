@@ -13,7 +13,7 @@ this type of request:
         "PropertyName": "LastName",
         "Relation": "Or",
         "Comparison": "Equal",
-        "Value": "Wight"
+        "Value": "With"
     }, {
         "PropertyName": "FirstName",
         "Relation": "And",
@@ -36,7 +36,7 @@ However, the following request:
             "PropertyName": "LastName",
             "Relation": "OrElse",
             "Comparison": "Equal",
-            "Value": "Wight"
+            "Value": "With"
         },
         {
             "PropertyName": "LastName",
