@@ -12,7 +12,7 @@ namespace DynamicQuerying.Sample.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Don't use plaintext connection strings in code, kids.
-            optionsBuilder.UseSqlServer("Server=localhost,20302;Database=sample-db;User Id=sa;Password=Your_password123;");
+            optionsBuilder.UseSqlServer("Server=localhost,20342;User Id=sa;Password=Your_password123;TrustServerCertificate=true;");
         }
     }
 }

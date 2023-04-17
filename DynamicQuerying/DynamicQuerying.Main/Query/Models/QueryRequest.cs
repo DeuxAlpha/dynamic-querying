@@ -13,7 +13,7 @@ namespace DynamicQuerying.Main.Query.Models
         public IEnumerable<Filter> Filters { get; set; } = new List<Filter>();
         public IEnumerable<Sorter> Sorters { get; set; } = new List<Sorter>();
         public IEnumerable<Aggregator> Aggregators { get; set; } = new List<Aggregator>();
-        public IEnumerable<Distinction> Distinctions { get; set; } = new List<Distinction>();
+        public IEnumerable<Distinctor> Distinctions { get; set; } = new List<Distinctor>();
         public int Page { get; set; } = 1;
         public int Items { get; set; } = 30;
     }

@@ -4,31 +4,33 @@ using DynamicQuerying.Sample.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+#nullable disable
 
 namespace DynamicQuerying.Sample.Migrations
 {
     [DbContext(typeof(SampleContext))]
-    [Migration("20201226044138_InitialMigration")]
-    partial class InitialMigration
+    partial class SampleContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("DynamicQuerying.Sample.Models.User", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DynamicQuerying.Utility.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Created")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -40,10 +42,10 @@ namespace DynamicQuerying.Sample.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("LoggedIn")
+                    b.Property<bool?>("LoggedIn")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Revenue")
+                    b.Property<decimal?>("Revenue")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserName")
