@@ -8,12 +8,12 @@ namespace DynamicQuerying.Sample.Extensions
         public static string GetAssignedName(this MemberMap memberMap)
         {
             var assignedName = memberMap.Data.Names.FirstOrDefault();
-            return assignedName ?? memberMap.Data.Member.Name;
+            return assignedName ?? memberMap.Data.Member?.Name;
         }
 
         public static string GetOriginalName(this MemberMap memberMap)
         {
-            return memberMap.Data.Member.Name;
+            return memberMap.Data.Member?.Name;
         }
     }
 }
