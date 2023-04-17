@@ -21,7 +21,7 @@ namespace DynamicQuerying.Sample.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("DynamicQuerying.Sample.Models.User", b =>
+            modelBuilder.Entity("DynamicQuerying.Utility.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

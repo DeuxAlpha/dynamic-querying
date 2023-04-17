@@ -4,6 +4,7 @@
     <LangVersion>default</LangVersion>
     <OutputType>Library</OutputType>
     <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>DynamicQuerying.Sample</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>

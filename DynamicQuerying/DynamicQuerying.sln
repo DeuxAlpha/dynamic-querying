@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Main", "Dyn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Tests", "DynamicQuerying.Tests\DynamicQuerying.Tests.csproj", "{339469E0-9965-4806-A7D4-9A14FAB8645E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Sample", "DynamicQuerying.Sample\DynamicQuerying.Sample.csproj", "{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.Utility", "DynamicQuerying.Utility\DynamicQuerying.Utility.csproj", "{0044EE1E-DE36-4915-9A80-2DDCC7274DA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuerying.App", "DynamicQuerying.App\DynamicQuerying.App.csproj", "{3E20EBE4-79AF-42DE-90C9-A56D7E285F81}"
 EndProject

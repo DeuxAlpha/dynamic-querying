@@ -25,7 +25,7 @@ namespace DynamicQuerying.Sample.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DynamicQuerying.Sample.Models.User", b =>
+            modelBuilder.Entity("DynamicQuerying.Utility.Models.User", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
