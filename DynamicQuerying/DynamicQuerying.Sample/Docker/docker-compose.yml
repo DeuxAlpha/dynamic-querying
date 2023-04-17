@@ -9,7 +9,7 @@ services:
       ACCEPT_EULA: Y
       SA_PASSWORD: Your_password123
     ports:
-      - 20302:1433
+      - 20342:1433
     volumes:
       - querying-sample:/var/opt/mssql
 
