@@ -10,7 +10,7 @@ namespace DynamicQuerying.Sample.Contexts.Entities
         {
             builder.HasKey(u => u.Id);
 
-            builder.Property(u => u.Id).HasColumnName("ID").IsRequired();
+            builder.Property(u => u.Id).HasColumnName("ID").IsRequired().ValueGeneratedNever();
 
             builder.Property(u => u.UserName).HasMaxLength(255).IsRequired();
 
