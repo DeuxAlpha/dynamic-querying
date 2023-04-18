@@ -28,7 +28,7 @@ this type of request:
     }]
 }
 ```
-Is going to result only in results for Jeremy Flucker.
+Is going to result only in results for Jeremy Out.
 
 However, the following request:  
 ```json
@@ -54,6 +54,6 @@ However, the following request:
     ]
 }
 ```
-Is going to result in results for Jeremy With _and_ Jeremy Flucker.
+Is going to result in results for Jeremy With _and_ Jeremy Out.
 
 In the library, the order of applied filters impacts how the results get resolved.
