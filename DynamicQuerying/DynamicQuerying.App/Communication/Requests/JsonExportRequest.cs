@@ -1,6 +1,6 @@
 ﻿using DynamicQuerying.Main.Query.Models;
 
-namespace DynamicQuerying.Sample.Communication.Requests
+namespace DynamicQuerying.App.Communication.Requests
 {
     public class JsonExportRequest
     {

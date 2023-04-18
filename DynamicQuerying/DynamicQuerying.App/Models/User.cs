@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DynamicQuerying.Sample.Models
+﻿namespace DynamicQuerying.App.Models
 {
     public class User
     {

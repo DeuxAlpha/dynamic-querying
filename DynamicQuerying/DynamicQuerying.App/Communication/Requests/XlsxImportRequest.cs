@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace DynamicQuerying.Sample.Communication.Requests
+﻿namespace DynamicQuerying.App.Communication.Requests
 {
     public class XlsxImportRequest
     {

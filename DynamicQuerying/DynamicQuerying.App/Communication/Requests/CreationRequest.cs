@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DynamicQuerying.Sample.Communication.Requests
+﻿namespace DynamicQuerying.App.Communication.Requests
 {
     public class CreationRequest<T>
     {

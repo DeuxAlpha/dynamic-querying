@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using DynamicQuerying.Main.Query.Models;
+﻿using DynamicQuerying.Main.Query.Models;
 
-namespace DynamicQuerying.Sample.Communication.Requests
+namespace DynamicQuerying.App.Communication.Requests
 {
     // The way the GenerationRequest is used is as follows:
     // The QueryRequest first queries all items.

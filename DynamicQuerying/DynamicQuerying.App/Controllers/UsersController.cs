@@ -1,9 +1,9 @@
-﻿using DynamicQuerying.App.Contexts;
+﻿using DynamicQuerying.App.Communication.Requests;
+using DynamicQuerying.App.Contexts;
+using DynamicQuerying.App.Models;
 using DynamicQuerying.Main.Query.Models;
 using DynamicQuerying.Main.Query.Services;
-using DynamicQuerying.Sample.Communication.Requests;
 using DynamicQuerying.Sample.Extensions;
-using DynamicQuerying.Sample.Models;
 using DynamicQuerying.Sample.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿using DynamicQuerying.Sample.Models;
+﻿using DynamicQuerying.App.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DynamicQuerying.App.Contexts

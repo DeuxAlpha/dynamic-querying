@@ -1,4 +1,4 @@
-﻿using DynamicQuerying.Sample.Models;
+﻿using DynamicQuerying.App.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

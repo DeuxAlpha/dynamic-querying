@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DynamicQuerying.Main\DynamicQuerying.Main.csproj" />
       <ProjectReference Include="..\DynamicQuerying.Utility\DynamicQuerying.Utility.csproj" />
     </ItemGroup>
 
