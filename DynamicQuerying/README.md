@@ -1,4 +1,6 @@
 ﻿# Notes
+ 
+To pass any collection to the QueryService, use the AsQueryable() extension method.
 
 Take care to validate how querying actually works. For example, using
 this type of request:  
@@ -54,5 +56,4 @@ However, the following request:
 ```
 Is going to result in results for Jeremy With _and_ Jeremy Flucker.
 
-The library is powerful, but the order of applied filters _does_ matter,
-of course. It could be hard to troubleshoot at times.
+In the library, the order of applied filters impacts how the results get resolved.
