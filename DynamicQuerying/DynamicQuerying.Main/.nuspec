@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>DynamicQuerying.Main</id>
+    <version>2.0.0</version>
+    <authors>DeuxAlpha</authors>
+    <description>Query and aggregate data with dynamic expressions and an explicit API.</description>
+  </metadata>
+  <files>
+    <file src="bin/Release/netstandard2.1/DynamicQuerying.dll" target="lib/netstandard2.1/DynamicQuerying.dll" />
+  </files>
+</package>
