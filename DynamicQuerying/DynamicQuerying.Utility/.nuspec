@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+    <metadata>
+        <id>DynamicQuerying.Utility</id>
+        <version>2.0.0</version>
+        <authors>DeuxAlpha</authors>
+        <description>Some utility and helper classes to implement a basic CRUD application, including importing and exporting functionality for JSON, XLSX, and CSV</description>
+    </metadata>
+    <files>
+        <file src="bin/Release/netstandard2.1/DynamicQuerying.Utility.dll" target="lib/netstandard2.1/DynamicQuerying.Utility.dll" />
+    </files>
+</package>
