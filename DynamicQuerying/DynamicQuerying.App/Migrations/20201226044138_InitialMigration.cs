@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DynamicQuerying.Sample.Migrations
+namespace DynamicQuerying.App.Migrations
 {
     public partial class InitialMigration : Migration
     {

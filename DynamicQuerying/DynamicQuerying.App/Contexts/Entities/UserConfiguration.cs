@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DynamicQuerying.Sample.Contexts.Entities
+namespace DynamicQuerying.App.Contexts.Entities
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

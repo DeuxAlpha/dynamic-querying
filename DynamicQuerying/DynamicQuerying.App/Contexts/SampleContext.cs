@@ -1,7 +1,7 @@
 ﻿using DynamicQuerying.Sample.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DynamicQuerying.Sample.Contexts
+namespace DynamicQuerying.App.Contexts
 {
     public class SampleContext : DbContext
     {

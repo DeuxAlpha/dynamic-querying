@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DynamicQuerying.Sample.Migrations
+namespace DynamicQuerying.App.Migrations
 {
     /// <inheritdoc />
     public partial class RemoveDynamicGeneration : Migration

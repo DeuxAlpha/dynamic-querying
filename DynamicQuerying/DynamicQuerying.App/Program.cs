@@ -1,4 +1,4 @@
-using DynamicQuerying.Sample.Contexts;
+using DynamicQuerying.App.Contexts;
 using Serilog;
 using Serilog.Events;
 
