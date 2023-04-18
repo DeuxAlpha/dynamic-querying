@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using CsvHelper;
 using CsvHelper.Configuration;
-using DynamicQuerying.Sample.Extensions;
+using DynamicQuerying.Utility.Extensions;
 using Newtonsoft.Json;
 
-namespace DynamicQuerying.Sample.Services
+namespace DynamicQuerying.Utility.Services
 {
     public static class ExportService
     {

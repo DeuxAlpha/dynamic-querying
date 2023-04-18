@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using ClosedXML.Excel;
 using CsvHelper;
 using CsvHelper.Configuration;
-using DynamicQuerying.Sample.Extensions;
+using DynamicQuerying.Utility.Extensions;
 using Newtonsoft.Json;
 
-namespace DynamicQuerying.Sample.Services
+namespace DynamicQuerying.Utility.Services
 {
     public static class ImportService
     {
@@ -85,8 +85,8 @@ namespace DynamicQuerying.Sample.Services
 
         private class HeaderPropertyCombination
         {
-            public string Header { get; init; }
-            public string Property { get; init; }
+            public string Header { get; set; }
+            public string Property { get; set; }
         }
     }
 }

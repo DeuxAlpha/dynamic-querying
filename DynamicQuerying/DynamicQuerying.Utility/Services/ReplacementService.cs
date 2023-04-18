@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using DynamicQuerying.Sample.Extensions;
+using DynamicQuerying.Utility.Extensions;
 
-namespace DynamicQuerying.Sample.Services
+namespace DynamicQuerying.Utility.Services
 {
     public static class ReplacementService
     {

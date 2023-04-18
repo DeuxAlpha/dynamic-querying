@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DynamicQuerying.Sample.Extensions
+namespace DynamicQuerying.Utility.Extensions
 {
     public static class ObjectExtensions
     {

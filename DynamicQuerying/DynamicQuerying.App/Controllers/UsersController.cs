@@ -3,8 +3,8 @@ using DynamicQuerying.App.Contexts;
 using DynamicQuerying.App.Models;
 using DynamicQuerying.Main.Query.Models;
 using DynamicQuerying.Main.Query.Services;
-using DynamicQuerying.Sample.Extensions;
-using DynamicQuerying.Sample.Services;
+using DynamicQuerying.Utility.Extensions;
+using DynamicQuerying.Utility.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DynamicQuerying.App.Controllers;
