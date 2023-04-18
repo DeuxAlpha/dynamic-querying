@@ -22,7 +22,7 @@ this type of request:
     }, {
         "PropertyName": "LastName",
         "Comparison": "Equal",
-        "Value": "Flucker"
+        "Value": "Out"
     }]
 }
 ```
@@ -42,7 +42,7 @@ However, the following request:
             "PropertyName": "LastName",
             "Relation": "AndAlso",
             "Comparison": "Equal",
-            "Value": "Flucker"
+            "Value": "Out"
         },
         {
             "PropertyName": "FirstName",

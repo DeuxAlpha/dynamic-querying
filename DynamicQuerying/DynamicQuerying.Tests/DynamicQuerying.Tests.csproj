@@ -11,5 +11,9 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicQuerying.Main\DynamicQuerying.Main.csproj" />
+  </ItemGroup>
 
 </Project>
