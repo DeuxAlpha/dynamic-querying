@@ -26,7 +26,7 @@ using(var context = new DatabaseContext())
 
     var response = QueryService.GetQueryResponse(query, request);
 
-    foreach (var result in response.Results)
+    foreach (var result in response.Items)
     {
         Console.WriteLine(result);
     }
