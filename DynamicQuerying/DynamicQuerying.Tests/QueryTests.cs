@@ -280,7 +280,7 @@ namespace DynamicQuerying.Tests
             
             var query = new QueryRequest
             {
-                Distinctions = new[]
+                Distinctors = new[]
                 {
                     new Distinctor
                     {

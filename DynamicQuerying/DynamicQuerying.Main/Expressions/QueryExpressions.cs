@@ -78,9 +78,9 @@ namespace DynamicQuerying.Main.Expressions
                     };
             }
 
-            if (queryRequest.Distinctions != null && queryRequest.Distinctions.Any())
+            if (queryRequest.Distinctors != null && queryRequest.Distinctors.Any())
             {
-                queryResponse.Distinctions = from distinctor in queryRequest.Distinctions
+                queryResponse.Distinctions = from distinctor in queryRequest.Distinctors
                     let body = BaseExpressions.GetDotMember(parameter, distinctor.PropertyName)
                     let converted = Expression.Convert(body, typeof(object))
                     let lambda = Expression.Lambda<Func<T, object>>(converted, parameter).Compile()
