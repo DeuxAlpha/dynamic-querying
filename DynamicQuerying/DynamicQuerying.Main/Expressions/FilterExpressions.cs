@@ -24,6 +24,12 @@ namespace DynamicQuerying.Main.Expressions
         private static readonly MethodInfo WhereMethod =
             typeof(Queryable).GetMethods().First(method => method.Name == nameof(Queryable.Where));
 
+        private static readonly MethodInfo ToStringMethod =
+            typeof(object).GetMethod(nameof(ToString), Type.EmptyTypes);
+
+        private static readonly MethodInfo ToLowerMethod =
+            typeof(string).GetMethod(nameof(string.ToLower), Type.EmptyTypes);
+
         public static IQueryable<T> FilterByMembers<T>(IQueryable<T> source, IEnumerable<Filter> filters)
         {
             if (filters == null) return source;
@@ -70,6 +76,15 @@ namespace DynamicQuerying.Main.Expressions
 
         private static Expression BuildComparingExpression(Expression left, Expression right, ComparisonEnum comparisonEnum)
         {
+            if (comparisonEnum.IsStringComparison() || comparisonEnum == ComparisonEnum.Equal ||
+                comparisonEnum == ComparisonEnum.NotEqual)
+            {
+                left = Expression.Call(left, ToStringMethod);
+                left = Expression.Call(left, ToLowerMethod);
+                right = Expression.Call(right, ToStringMethod);
+                right = Expression.Call(right, ToLowerMethod);
+            }
+            
             return comparisonEnum switch
             {
                 ComparisonEnum.Equal => Expression.Equal(left, right),
