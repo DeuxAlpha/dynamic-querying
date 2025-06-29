@@ -12,7 +12,7 @@ namespace DynamicQuerying.Utility.Services
 {
     public static class ExportService
     {
-        public static async Task<byte[]> ExportDataToXlsx<T>(IEnumerable<T> data)
+        public static Task<byte[]> ExportDataToXlsx<T>(IEnumerable<T> data)
         {
             using var workbook = new XLWorkbook();
             var worksheet = workbook.AddWorksheet();
@@ -34,18 +34,18 @@ namespace DynamicQuerying.Utility.Services
                 }
             }
 
-            await using var memoryStream = new MemoryStream();
+            using var memoryStream = new MemoryStream();
             workbook.SaveAs(memoryStream);
-            return memoryStream.ToArray();
+            return Task.FromResult(memoryStream.ToArray());
         }
 
         public static async Task<byte[]> ExportDataToCsv<T>(IEnumerable<T> data, string delimiter)
         {
-            await using var memoryStream = new MemoryStream();
-            await using var streamWriter = new StreamWriter(memoryStream);
+            using var memoryStream = new MemoryStream();
+            using var streamWriter = new StreamWriter(memoryStream);
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture);
             csvConfig.Delimiter = delimiter;
-            await using var csvWriter = new CsvWriter(streamWriter, csvConfig);
+            using var csvWriter = new CsvWriter(streamWriter, csvConfig);
             csvWriter.WriteHeader<T>();
             await csvWriter.WriteRecordsAsync(data);
 
@@ -56,8 +56,8 @@ namespace DynamicQuerying.Utility.Services
             IEnumerable<T> data,
             bool indented)
         {
-            await using var memoryStream = new MemoryStream();
-            await using var streamWriter = new StreamWriter(memoryStream);
+            using var memoryStream = new MemoryStream();
+            using var streamWriter = new StreamWriter(memoryStream);
             var serialized = JsonConvert.SerializeObject(
                 data,
                 indented ? Formatting.Indented : Formatting.None);
